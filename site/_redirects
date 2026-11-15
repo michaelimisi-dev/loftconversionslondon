@@ -2,8 +2,8 @@
 # services/dormer-loft-conversion.html, and redirects any .html URL to the
 # version without .html, so no rules are needed for that.
 #
-# www -> apex is handled in Cloudflare: set loftconversionslondon.co.uk as the
-# primary custom domain in Pages > Custom domains (see README).
+# www -> apex is handled by a Cloudflare Redirect Rule on the zone, not here
+# (see the Domain section of README.md).
 #
 # Add a line here if a page is ever renamed, for example:
 # /services/old-name  /services/new-name  301

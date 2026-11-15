@@ -34,11 +34,21 @@ Then open http://localhost:8080.
 
 ## Deploy to Cloudflare Pages
 
+The site deploys from GitHub: every push to `main` publishes the `site/` folder. It was set up in the Cloudflare dashboard under Workers & Pages → Create application → Pages → Import an existing Git repository, with framework preset None, no build command (or `exit 0`) and build output directory `site`. Run `python tools/build.py` before pushing, because Cloudflare publishes the committed files as they are.
+
+To deploy by hand instead:
+
 ```bash
 npx wrangler pages deploy ./site --project-name=loftconversionslondon
 ```
 
-The first run creates the project. To connect the domain: Cloudflare dashboard → Workers & Pages → loftconversionslondon → Custom domains → add `loftconversionslondon.co.uk`, then add `www.loftconversionslondon.co.uk`. Set the apex as primary so www redirects to it. Turn on "Always Use HTTPS" for the zone.
+### Domain
+
+1. Add `loftconversionslondon.co.uk` to Cloudflare (Add a domain, Free plan). Before changing nameservers, check that the imported DNS records include the domain's MX and email records, or email to info@loftconversionslondon.co.uk will stop, and so will the leads.
+2. At the domain registrar, replace the nameservers with the two Cloudflare gives you, and wait for the domain to show as Active.
+3. In Workers & Pages → loftconversionslondon → Custom domains, add `loftconversionslondon.co.uk`, then `www.loftconversionslondon.co.uk`.
+4. Redirect www to the main domain with a Redirect Rule (Rules → Redirect Rules → the "Redirect from WWW to root" template). Pages does not do this on its own.
+5. Under SSL/TLS → Edge Certificates, turn on Always Use HTTPS.
 
 ## Lead forms (FormSubmit)
 
