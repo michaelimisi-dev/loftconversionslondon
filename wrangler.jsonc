@@ -1,0 +1,15 @@
+{
+  // Cloudflare deploy settings. Cloudflare runs `npx wrangler deploy` on every push to main,
+  // which publishes the finished website in site/ (not the page sources in content/).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "loftconversionslondon",
+  "compatibility_date": "2026-11-13",
+  "assets": {
+    "directory": "./site"
+  },
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  }
+}
